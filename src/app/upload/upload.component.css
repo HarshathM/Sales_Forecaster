@@ -1,0 +1,15 @@
+.entire{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:80%;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+.mat-card{
+    /* background-color: aliceblue; */
+    box-shadow: 50px;
+    font-family: 'Times New Roman', Times, serif;
+}

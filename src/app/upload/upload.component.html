@@ -1,1 +1,14 @@
-<p>upload works!</p>
+<div class="entire">
+    <mat-card>
+        <mat-form-field appearance="outline">
+            <input hidden type='file' #fileclick (change)="select_file($event)" >
+            <input readonly matInput value="{{this.fname}}" placeholder="Choose the dataset file" >
+            <button *ngIf="this.file" matSuffix (click)="deletefile()" matTooltip="Remove File" matTooltipPosition = "above" color="warn" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+            <button matSuffix mat-mini-fab color="primary" (click)="fileclick.click()" matTooltip="Select a file" matTooltipPosition="right">
+                <mat-icon>backup</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-card>
+</div>
