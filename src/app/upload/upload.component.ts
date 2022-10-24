@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { config } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -12,7 +13,8 @@ export class UploadComponent implements OnInit {
   fname ='';
   fformat='';
   formfile:any;
-  
+  periodicity= '6';
+  showbutton = true;
 
   constructor(private snackbar:MatSnackBar) { }
 
@@ -47,6 +49,15 @@ export class UploadComponent implements OnInit {
     this.file=null;
     // this.formfile.delete("file");
     console.log(this);
+  }
+
+  predict(){
+    if(this.file){
+      this.showbutton=false;
+    }
+    else{
+      this.snackbar.open("Please select a file","Okay",{duration:3000});
+    }
   }
 
 }

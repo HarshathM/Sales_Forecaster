@@ -4,12 +4,16 @@
     align-items: center;
     height:80%;
 }
-.flex-center{
+.card{
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 .mat-card{
     /* background-color: aliceblue; */
     box-shadow: 50px;
     font-family: 'Times New Roman', Times, serif;
+}
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white ;
 }

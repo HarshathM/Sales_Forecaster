@@ -4,6 +4,11 @@
     align-items: center;
     height:80%;
 }
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+}
 .flex-center{
     display: flex;
     justify-content: center;
