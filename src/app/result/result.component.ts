@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { reduce } from 'rxjs';
+import { CanvasJS } from 'src/assets/canvasjs.angular.component';
 
 @Component({
   selector: 'app-result',
@@ -21,44 +23,55 @@ export class ResultComponent implements OnInit {
 			this.load = true;
 		});
   }
-
-  getDataPointsFromCSV(csv:any) {
-    let dataPoints =[]
-		let csvLines = []
+  getDataPointsFromCSV(csv:any, col:number) {                       //https://canvasjs.com/docs/charts/how-to/create-charts-from-csv/
+    let dataPoints =[];
+		let csvLines = [];
 		let points = [];
-    csvLines = csv.split(/[\r?\n|\r|\n]+/);    
+    let date = [];
+    csvLines = csv.split(/[\r?\n|\r|\n]+/);       
     for (var i = 0; i < csvLines.length; i++)
         if (csvLines[i].length > 0) {
             points = csvLines[i].split(",");
+            date = points[0].split("-");
             dataPoints.push({ 
-                x: points[0], 
-                y: parseFloat(points[1]) 		
+              x: new Date(date[0],date[1]-1),  //month starts from 0 . so only there is -1
+              y: parseInt(points[col]) 		
 				});
 		}
-			return dataPoints;
+		return dataPoints;
 	}
-	generateRandomData = () => {
-		var y  = 1000, dps = [];
-		for(var i = 0; i < 1000; i++) {
-			y += Math.ceil(Math.random() * 10 - 5);
-			dps.push({ y: y});
-		}
-		return dps;
-	}
-
+	
 	pass_param(){
-		this.chartOptions = {
+		this.chartOptions = {                              //https://canvasjs.com/angular-charts/multi-series-chart/
+      animationEnabled: true,
 			zoomEnabled: true,
 			exportEnabled: true,
 			theme: "light2",
 			title: {
-				text: "Try Zooming & Panning"
+				text: "Predicted Graph"
 			},
+      axisX: {                                          //https://canvasjs.com/docs/charts/methods/canvasjs/format-date/
+        labelFormatter: function (e:any) {
+          return CanvasJS.formatDate( e.value, "MMM YY"); 
+        },
+        labelAngle: -20
+      }, 
+      axisY:{
+        title: "Sales"
+      },
 			data: [{
 				type: "line",
-				dataPoints: this.getDataPointsFromCSV(this.csv_data)
-				// dataPoints : this.generateRandomData()
-			}]
+        color:"orange",
+        showInLegend: true,
+		    name: "Actual Sales",
+		    dataPoints: this.getDataPointsFromCSV(this.csv_data, 1)
+			},{
+        type: "line",
+        color:"blue",
+        showInLegend: true,
+        name: "Predicted Sales",
+        dataPoints: this.getDataPointsFromCSV(this.csv_data, 2)
+      }]
 		}
 	}
 }
