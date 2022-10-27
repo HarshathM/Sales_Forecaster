@@ -12,9 +12,9 @@
         </mat-form-field>
         <mat-form-field appearance ="outline" color="primary">
             <mat-label>Periodicity</mat-label>
-            <mat-select [(value)]="periodicity">
+            <mat-select [(value)]="periodicity" (valueChange)="add_period()">
                 <mat-option value=1 >1 Month</mat-option>
-                <mat-option *ngFor="let period of [2,4,6,8,10,12]" value={{period}} >{{period}} Months</mat-option>
+                <mat-option *ngFor="let period of [2,4,6,8,10,12]" value="{{period}}" >{{period}} Months</mat-option>
             </mat-select>
         </mat-form-field>
         <button (click)="predict()" mat-raised-button color="primary" style="min-height: 40px;"> 
