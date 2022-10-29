@@ -1,5 +1,6 @@
 <div class="entire">
     <mat-card class="card mat-elevation-z8">
+        <mat-card-title style="text-align: center;">Input Fields</mat-card-title>
         <mat-form-field appearance="outline">
             <input hidden type='file' #fileclick (change)="select_file($event)" >
             <input readonly matInput value="{{this.fname}}" placeholder="Choose the dataset file" >
@@ -12,7 +13,7 @@
         </mat-form-field>
         <mat-form-field appearance ="outline" color="primary">
             <mat-label>Periodicity</mat-label>
-            <mat-select [(value)]="periodicity" (valueChange)="add_period()">
+            <mat-select [(value)]="periodicity">
                 <mat-option value=1 >1 Month</mat-option>
                 <mat-option *ngFor="let period of [2,4,6,8,10,12]" value="{{period}}" >{{period}} Months</mat-option>
             </mat-select>
