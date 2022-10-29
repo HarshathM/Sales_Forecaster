@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { saveAs } from 'file-saver';
 // import { reduce } from 'rxjs';
 import { CanvasJS } from 'src/assets/canvasjs.angular.component';
 
@@ -18,14 +19,15 @@ export class ResultComponent implements OnInit {
 	load_graph = false;
   load_table = false;
   displayedColumns=["Metrics", "Values"];
+  api_url = "http://127.0.0.1:5000/api/";
+
   ngOnInit(): void {
-		let api_url = "http://127.0.0.1:5000/api/";
-		this.http.get(api_url+"get_csv",{responseType:"text"}).subscribe((res)=>{
+		this.http.get(this.api_url+"get_csv",{responseType:"text"}).subscribe((res)=>{
 			this.csv_data = res;
 			this.open_page();
 			this.load_graph = true;
 		});
-    this.http.get(api_url+"metrics").subscribe({
+    this.http.get(this.api_url+"metrics").subscribe({
       next:((res:any)=>{
         this.metrics=res;
         this.keys = Object.keys(res);
@@ -85,4 +87,17 @@ export class ResultComponent implements OnInit {
       }]
 		}
 	}
+
+  download_csv(){
+    this.http.get(this.api_url+"get_csv",{responseType:"blob"}).subscribe((res)=>{
+			saveAs(res,"Predicted.csv");
+		});
+  }
+
+  download_metrics(){
+    this.http.get(this.api_url+"metrics",{responseType:"blob"}).subscribe((res)=>{
+			saveAs(res,"Metrics.json");
+		});
+  }
+
 }
