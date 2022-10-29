@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:80%;
+    height:90%;
+    background: #f7f7f7;
 }
 .card{
     display: flex;
