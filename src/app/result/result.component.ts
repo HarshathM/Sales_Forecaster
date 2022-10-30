@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
-// import { reduce } from 'rxjs';
 import { CanvasJS } from 'src/assets/canvasjs.angular.component';
+
+// Done by Harshath.M
 
 @Component({
   selector: 'app-result',

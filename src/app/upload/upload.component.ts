@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { config } from 'rxjs';
+
+// Done by Harshath.M
 
 @Component({
   selector: 'app-upload',

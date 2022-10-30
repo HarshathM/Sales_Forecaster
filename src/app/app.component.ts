@@ -8,3 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Sales_Forecaster';
 }
+// Done by Harshath.M
+
